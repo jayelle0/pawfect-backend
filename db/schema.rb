@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_04_214243) do
+ActiveRecord::Schema.define(version: 2021_05_06_202801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +42,9 @@ ActiveRecord::Schema.define(version: 2021_05_04_214243) do
     t.integer "liker_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "blocked"
+    t.boolean "liked"
+    t.boolean "matched"
     t.index ["liked_id", "liker_id"], name: "index_connections_on_liked_id_and_liker_id", unique: true
     t.index ["liked_id"], name: "index_connections_on_liked_id"
     t.index ["liker_id"], name: "index_connections_on_liker_id"
@@ -85,16 +89,14 @@ ActiveRecord::Schema.define(version: 2021_05_04_214243) do
     t.string "size"
     t.string "breed"
     t.bigint "owner_id", null: false
-    t.bigint "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["location_id"], name: "index_users_on_location_id"
+    t.geography "coordinates", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.index ["owner_id"], name: "index_users_on_owner_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "conversations", "connections"
   add_foreign_key "messages", "conversations"
-  add_foreign_key "users", "locations"
   add_foreign_key "users", "owners"
 end

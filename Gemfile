@@ -43,4 +43,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "active_model_serializers", "~> 0.10.12"
 gem "faker", "~> 2.16"
 
+gem "geocoder"
 
+gem 'activerecord-postgis-adapter'
