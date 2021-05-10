@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_06_202801) do
+ActiveRecord::Schema.define(version: 2021_05_10_182406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,14 +84,15 @@ ActiveRecord::Schema.define(version: 2021_05_06_202801) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.date "birthdate"
-    t.string "sex"
     t.boolean "spade"
     t.string "size"
     t.string "breed"
     t.bigint "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.geography "coordinates", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
+    t.float "longitude"
+    t.float "latitude"
+    t.string "gender"
     t.index ["owner_id"], name: "index_users_on_owner_id"
   end
 
