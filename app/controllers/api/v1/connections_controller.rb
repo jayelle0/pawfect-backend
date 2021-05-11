@@ -32,6 +32,6 @@ class Api::V1::ConnectionsController < ApplicationController
     private
 
     def connection_params
-        params.require(:connection).permit(:liked_id, :liker_id, :blocked, :liked, :matched) 
+        params.require(:connection).permit(:liked_id, :liker_id, :blocked, :initiated, :matched) 
     end 
 end
